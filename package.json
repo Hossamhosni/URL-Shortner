@@ -4,6 +4,7 @@
   "description": "An API that takes a url and provide a shortened url",
   "main": "app.js",
   "scripts": {
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hossam Hosny",
