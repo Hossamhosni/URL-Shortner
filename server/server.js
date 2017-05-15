@@ -48,7 +48,7 @@ app.get('/new/:url(*)', (req, res) => {
 			});
 			var response = {
 				original_url: url,
-				shortened_url: `http://localhost:3000/${shortenedUrl}`
+				shortened_url: `${mainUrl}${shortenedUrl}`
 			}
 			newUrl.save().then((url) => {
 				res.send(response);
@@ -60,7 +60,7 @@ app.get('/new/:url(*)', (req, res) => {
 		// if it is already in the database we will send it to the user
 		var response = {
 			original_url: url,
-			shortened_url: `http://localhost:3000/${urlRes.shortenedUrl}`
+			shortened_url: `${mainUrl}${urlRes.shortenedUrl}`
 		}
 		res.send(response);
 	});
