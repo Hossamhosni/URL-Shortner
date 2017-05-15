@@ -1,5 +1,12 @@
 'use strict';
 
+var mainUrl = "https://hhshort-url.herokuapp.com";
+// config
+var env = process.env.NODE_ENV || 'development';
+if (env === "development") {
+  process.env.MONGODB_URI = "mongodb://localhost:27017/URL-Shortner";
+	mainUrl = "http://localhost:3000";
+}
 // requires
 const express = require('express');
 const hbs = require('hbs');
@@ -18,7 +25,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // render the instructions view
 app.get('/', (req, res) => {
-	res.render('index');
+	res.render('index', {
+		mainUrl
+	});
 });
 
 // GET route to deal with requested urls
@@ -46,7 +55,7 @@ app.get('/new/:url(*)', (req, res) => {
 			}, (e) => {
 				res.status(400).send();
 			});
-			res.send(response);
+			return res.send(response);
 		}
 		// if it is already in the database we will send it to the user
 		var response = {
